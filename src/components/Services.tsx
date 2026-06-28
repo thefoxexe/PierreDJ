@@ -16,24 +16,25 @@ export function Services() {
         />
 
         <RevealGroup
-          className="mt-14 grid auto-rows-[minmax(180px,auto)] grid-cols-2 gap-3 lg:grid-cols-4"
+          className="mt-14 grid grid-cols-1 gap-3 sm:auto-rows-[minmax(210px,auto)] sm:grid-cols-2 lg:grid-cols-4"
           stagger={0.05}
         >
           {services.items.map((s, i) => {
-            // Bento : la 1re prestation phare occupe une grande tuile,
-            // les autres mises en avant occupent 2 colonnes.
+            // Bento (tablette/bureau) : la 1re prestation phare occupe une
+            // grande tuile, les autres mises en avant occupent 2 colonnes.
+            // Sur mobile : une seule colonne, cartes pleine largeur.
             const big = i === 0;
             const wide = !big && s.featured;
             const span = big
-              ? "col-span-2 row-span-2"
+              ? "sm:col-span-2 sm:row-span-2"
               : wide
-                ? "col-span-2"
-                : "col-span-1";
+                ? "sm:col-span-2"
+                : "";
 
             return (
               <RevealItem key={s.slug} className={span}>
                 <article
-                  className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 ${
+                  className={`group relative flex h-full min-h-[200px] flex-col justify-between overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 ${
                     s.featured
                       ? "bg-gradient-to-br from-volt to-flare text-white hover:shadow-[0_24px_60px_-18px_rgba(255,45,120,0.65)]"
                       : "border border-bone/12 bg-night-800 hover:border-bone/30 hover:shadow-[0_24px_60px_-22px_rgba(110,75,255,0.5)]"
