@@ -13,22 +13,37 @@ export function Footer() {
   const socials = Object.entries(site.social).filter(([, url]) => Boolean(url));
 
   return (
-    <footer className="bg-ink text-cream/70">
+    <footer className="bg-night text-bone">
+      {/* Bandeau "appel a l'action" geant */}
+      <div className="container-page border-b border-bone/10 py-16 sm:py-20">
+        <a href="#contact" className="group block">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-flare">
+            On en parle ?
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <h2 className="display-xl text-5xl sm:text-7xl lg:text-8xl">
+              Reservez<span className="text-gradient"> votre date</span>
+            </h2>
+            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-gradient-to-br from-volt to-flare text-white transition-transform duration-300 group-hover:scale-110">
+              <Icons.arrowRight className="h-7 w-7 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />
+            </span>
+          </div>
+        </a>
+      </div>
+
       <div className="container-page py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Marque */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 font-display text-lg font-bold text-cream">
-              <span className="grid h-9 w-9 place-items-center rounded-lg bg-gold text-sm font-bold text-ink">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-volt to-flare text-sm font-extrabold text-white">
                 PM
               </span>
-              {site.name}
+              <span className="font-display text-lg font-extrabold uppercase">{site.name}</span>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-bone/60">
               {site.role} en {site.contact.area}. Mariages, soirees privees, evenements
               d&apos;entreprise et manifestations publiques.
             </p>
-
             {socials.length > 0 && (
               <div className="mt-5 flex gap-2">
                 {socials.map(([key, url]) => {
@@ -40,7 +55,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={key}
-                      className="grid h-10 w-10 place-items-center rounded-full border border-white/15 transition-colors hover:border-gold hover:text-gold"
+                      className="grid h-10 w-10 place-items-center rounded-full border border-bone/15 transition-colors hover:border-transparent hover:bg-gradient-to-br hover:from-volt hover:to-flare hover:text-white"
                     >
                       <Icon className="h-5 w-5" />
                     </a>
@@ -50,15 +65,12 @@ export function Footer() {
             )}
           </div>
 
-          {/* Navigation */}
           <nav aria-label="Pied de page">
-            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-cream">
-              Navigation
-            </h2>
-            <ul className="mt-4 space-y-2 text-sm">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-bone/50">Navigation</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="transition-colors hover:text-gold">
+                  <a href={item.href} className="link-underline text-bone/75 hover:text-bone">
                     {item.label}
                   </a>
                 </li>
@@ -66,48 +78,34 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Contact */}
           <div>
-            <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-cream">
-              Contact
-            </h2>
-            <ul className="mt-4 space-y-3 text-sm">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-bone/50">Contact</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <a
-                  href={`tel:${site.contact.phoneIntl}`}
-                  className="flex items-center gap-2 transition-colors hover:text-gold"
-                >
-                  <Icons.phone className="h-4 w-4 shrink-0" />
+                <a href={`tel:${site.contact.phoneIntl}`} className="flex items-center gap-2 text-bone/75 hover:text-bone">
+                  <Icons.phone className="h-4 w-4 shrink-0 text-flare" />
                   {site.contact.phone}
                 </a>
               </li>
               {site.contact.email && (
                 <li>
-                  <a
-                    href={`mailto:${site.contact.email}`}
-                    className="flex items-center gap-2 transition-colors hover:text-gold"
-                  >
-                    <Icons.mail className="h-4 w-4 shrink-0" />
+                  <a href={`mailto:${site.contact.email}`} className="flex items-center gap-2 text-bone/75 hover:text-bone">
+                    <Icons.mail className="h-4 w-4 shrink-0 text-flare" />
                     {site.contact.email}
                   </a>
                 </li>
               )}
-              <li className="flex items-center gap-2">
-                <Icons.pin className="h-4 w-4 shrink-0" />
+              <li className="flex items-center gap-2 text-bone/75">
+                <Icons.pin className="h-4 w-4 shrink-0 text-flare" />
                 {site.contact.area}
               </li>
             </ul>
-            <a href="#contact" className="btn-primary mt-5 px-5 py-2.5 text-xs">
-              Demander un devis
-            </a>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs sm:flex-row">
-          <p>
-            &copy; {year} {site.name}. Tous droits reserves.
-          </p>
-          <p className="text-cream/50">{site.role}</p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-bone/10 pt-6 text-xs text-bone/45 sm:flex-row">
+          <p>&copy; {year} {site.name}. Tous droits reserves.</p>
+          <p className="uppercase tracking-wide">{site.role}</p>
         </div>
       </div>
     </footer>

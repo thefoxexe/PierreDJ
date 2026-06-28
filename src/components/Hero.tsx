@@ -4,14 +4,14 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { home } from "@/content/home";
 import { site } from "@/content/site";
+import { services } from "@/content/services";
 import { Icons } from "./icons";
+import { Marquee } from "./Marquee";
 
-/** Met en valeur le segment entoure de ** ** dans le titre du hero. */
 function renderTitle(title: string) {
-  const parts = title.split(/\*\*(.*?)\*\*/g);
-  return parts.map((part, i) =>
+  return title.split(/\*\*(.*?)\*\*/g).map((part, i) =>
     i % 2 === 1 ? (
-      <span key={i} className="text-gradient-gold">
+      <span key={i} className="text-gradient">
         {part}
       </span>
     ) : (
@@ -29,9 +29,9 @@ export function Hero() {
   return (
     <section
       id="accueil"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink text-cream"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-night text-bone"
     >
-      {/* ---- Media de fond ---- */}
+      {/* ---- Fond ---- */}
       <div className="absolute inset-0 z-0">
         {hasVideo ? (
           <video
@@ -45,128 +45,146 @@ export function Hero() {
             <source src={hero.media.video} type="video/mp4" />
           </video>
         ) : hasImage ? (
-          <Image
-            src={hero.media.image}
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+          <Image src={hero.media.image} alt="" fill priority sizes="100vw" className="object-cover" />
         ) : (
-          // Fond anime de demonstration (effets de lumiere) en l'absence de media
-          <AnimatedBackdrop reduce={!!reduce} />
+          <Backdrop reduce={!!reduce} />
         )}
-        {/* Voile assombrissant pour la lisibilite : opaque a gauche (sous le texte),
-            transparent a droite pour laisser passer les effets de lumiere. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/65 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink" />
-        <div className="absolute inset-0 bg-noise opacity-60" />
+        {/* Voile pour la lisibilite */}
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/40 to-night/70" />
       </div>
 
-      <div className="container-page relative z-10 w-full py-28 sm:py-32">
-        <div className="max-w-3xl">
+      {/* ---- Contenu ---- */}
+      <div className="container-page relative z-10 flex flex-1 flex-col justify-center pt-28 pb-10 sm:pt-32">
+        <div className="grid items-end gap-y-10 lg:grid-cols-12 lg:gap-x-10">
+          {/* Titre */}
+          <div className="lg:col-span-8">
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-bone/70"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime" />
+              </span>
+              {hero.badge}
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="display-xl mt-6 text-[3.25rem] leading-[0.9] sm:text-7xl lg:text-8xl xl:text-[8.5rem]"
+            >
+              {renderTitle(hero.title)}
+            </motion.h1>
+          </div>
+
+          {/* Colonne droite : sous-titre + CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold-bright backdrop-blur"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="lg:col-span-4 lg:pb-3"
           >
-            <span className="flex items-end gap-[3px]" aria-hidden>
-              {[0, 1, 2, 3].map((i) => (
-                <span
-                  key={i}
-                  className="equalizer-bar h-3 w-[3px] rounded-full bg-gold"
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                />
+            <p className="max-w-md text-base leading-relaxed text-bone/75">{hero.subtitle}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href={hero.primaryCta.href} className="btn-fill">
+                {hero.primaryCta.label}
+                <Icons.arrowRight className="h-4 w-4" />
+              </a>
+              <a href={`tel:${site.contact.phoneIntl}`} className="btn-outline">
+                <Icons.phone className="h-4 w-4" />
+                {site.contact.phone}
+              </a>
+            </div>
+            <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium uppercase tracking-wide text-bone/55">
+              {hero.highlights.map((h) => (
+                <li key={h} className="flex items-center gap-1.5">
+                  <span className="text-lime">/</span>
+                  {h}
+                </li>
               ))}
-            </span>
-            {hero.badge}
+            </ul>
           </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-6 font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            {renderTitle(hero.title)}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-cream/75 sm:text-lg"
-          >
-            {hero.subtitle}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
-          >
-            <a href={hero.primaryCta.href} className="btn-primary">
-              {hero.primaryCta.label}
-              <Icons.arrowRight className="h-4 w-4" />
-            </a>
-            <a href={`tel:${site.contact.phoneIntl}`} className="btn-ghost-dark">
-              <Icons.phone className="h-4 w-4" />
-              {site.contact.phone}
-            </a>
-          </motion.div>
-
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-cream/70"
-          >
-            {hero.highlights.map((h) => (
-              <li key={h} className="flex items-center gap-2">
-                <Icons.check className="h-4 w-4 text-gold" />
-                {h}
-              </li>
-            ))}
-          </motion.ul>
         </div>
       </div>
 
-      {/* Indicateur de defilement */}
-      <div className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 sm:block">
-        <motion.div
-          animate={reduce ? {} : { y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/25 p-1.5"
-        >
-          <span className="h-2 w-1 rounded-full bg-white/60" />
-        </motion.div>
+      {/* ---- Marquee bas ---- */}
+      <div className="relative z-10 border-y border-bone/10 bg-night/40 py-4 backdrop-blur-sm">
+        <Marquee
+          duration="40s"
+          items={services.items.map((s) => (
+            <span key={s.slug} className="font-display text-lg font-bold uppercase tracking-wide">
+              {s.title}
+            </span>
+          ))}
+        />
       </div>
+
+      {/* Badge circulaire rotatif */}
+      <RotatingBadge reduce={!!reduce} />
     </section>
   );
 }
 
-/** Fond anime premium : halos lumineux colores en mouvement lent. */
-function AnimatedBackdrop({ reduce }: { reduce: boolean }) {
+/* Fond : faisceaux de lumiere (scene) + halos colores anime. */
+function Backdrop({ reduce }: { reduce: boolean }) {
   return (
-    <div className="absolute inset-0 bg-ink">
+    <div className="absolute inset-0 bg-night">
+      {/* Faisceaux depuis le haut */}
+      <div className="absolute inset-x-0 top-0 h-[70%] overflow-hidden">
+        <div
+          className="absolute left-[15%] top-[-20%] h-[120%] w-[18vw] rotate-[18deg] bg-gradient-to-b from-volt/40 to-transparent blur-2xl"
+          style={{ animation: reduce ? undefined : "beam 7s ease-in-out infinite" }}
+        />
+        <div
+          className="absolute left-[45%] top-[-25%] h-[120%] w-[14vw] rotate-[-10deg] bg-gradient-to-b from-flare/35 to-transparent blur-2xl"
+          style={{ animation: reduce ? undefined : "beam 9s ease-in-out infinite 1s" }}
+        />
+        <div
+          className="absolute right-[12%] top-[-20%] h-[120%] w-[16vw] rotate-[12deg] bg-gradient-to-b from-volt-bright/35 to-transparent blur-2xl"
+          style={{ animation: reduce ? undefined : "beam 8s ease-in-out infinite 0.5s" }}
+        />
+      </div>
+      {/* Halos */}
       <motion.div
-        className="absolute -left-[15%] top-[-10%] h-[55vmax] w-[55vmax] rounded-full bg-accent/55 blur-[120px]"
-        animate={reduce ? {} : { x: [0, 80, 0], y: [0, 40, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -left-[10%] top-[10%] h-[55vmax] w-[55vmax] rounded-full bg-volt/30 blur-[130px]"
+        animate={reduce ? {} : { x: [0, 70, 0], y: [0, 40, 0] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute right-[2%] top-[6%] h-[62vmax] w-[62vmax] rounded-full bg-gold/70 blur-[100px]"
-        animate={reduce ? {} : { x: [0, -50, 0], y: [0, 55, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -right-[8%] bottom-[5%] h-[55vmax] w-[55vmax] rounded-full bg-flare/30 blur-[130px]"
+        animate={reduce ? {} : { x: [0, -60, 0], y: [0, -40, 0] }}
+        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        className="absolute bottom-[-10%] right-1/4 h-[52vmax] w-[52vmax] rounded-full bg-accent-bright/55 blur-[110px]"
-        animate={reduce ? {} : { x: [0, 50, 0], y: [0, -40, 0] }}
-        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-      />
+    </div>
+  );
+}
+
+/* Badge circulaire avec texte tournant + bouton lecture central. */
+function RotatingBadge({ reduce }: { reduce: boolean }) {
+  return (
+    <div className="pointer-events-none absolute bottom-28 right-6 z-10 hidden lg:block">
+      <div className="relative h-28 w-28">
+        <svg
+          viewBox="0 0 120 120"
+          className={`h-full w-full ${reduce ? "" : "animate-spin-slow"}`}
+        >
+          <defs>
+            <path id="circlePath" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
+          </defs>
+          <text className="fill-bone/70 text-[11px] font-semibold uppercase tracking-[0.25em]">
+            <textPath href="#circlePath" startOffset="0%">
+              Reservez votre date • Devis gratuit •
+            </textPath>
+          </text>
+        </svg>
+        <span className="absolute inset-0 m-auto grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-volt to-flare text-white">
+          <Icons.arrowRight className="h-5 w-5 -rotate-45" />
+        </span>
+      </div>
     </div>
   );
 }

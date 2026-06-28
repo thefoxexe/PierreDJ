@@ -19,8 +19,8 @@ export default function OpengraphImage() {
           justifyContent: "center",
           padding: "80px",
           background:
-            "linear-gradient(135deg, #0B0B0F 0%, #16131f 55%, #2a2350 100%)",
-          color: "#FAF8F4",
+            "linear-gradient(135deg, #0A0A0C 0%, #1a1230 55%, #3a1840 100%)",
+          color: "#F4F1E9",
           fontFamily: "sans-serif",
         }}
       >
@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             fontSize: 24,
             letterSpacing: 6,
             textTransform: "uppercase",
-            color: "#D4AF6A",
+            color: "#FF5C97",
             fontWeight: 600,
           }}
         >
@@ -65,7 +65,7 @@ export default function OpengraphImage() {
             marginTop: 48,
             fontSize: 30,
             fontWeight: 600,
-            color: "#E7C886",
+            color: "#8B6BFF",
           }}
         >
           {site.contact.phone}

@@ -8,56 +8,63 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette premium evenementiel : nuit profonde + or chaud + accent vibrant.
-        ink: {
-          DEFAULT: "#0B0B0F",
-          soft: "#16161D",
-          muted: "#22222C",
+        // Base sombre profonde + bone (blanc casse) : contraste editorial fort.
+        night: {
+          DEFAULT: "#0A0A0C",
+          800: "#101014",
+          700: "#16161C",
+          600: "#1F1F27",
         },
-        cream: "#FAF8F4",
-        gold: {
-          DEFAULT: "#D4AF6A",
-          bright: "#E7C886",
-          deep: "#B8934E",
+        bone: {
+          DEFAULT: "#F4F1E9",
+          200: "#EAE6DB",
         },
-        accent: {
-          DEFAULT: "#7C5CFF",
-          bright: "#9B86FF",
+        // Accent electrique evenementiel : violet -> magenta (lumieres de scene).
+        volt: {
+          DEFAULT: "#6E4BFF",
+          bright: "#8B6BFF",
         },
+        flare: {
+          DEFAULT: "#FF2D78",
+          bright: "#FF5C97",
+        },
+        // Micro-accent acidule pour les details (points, labels).
+        lime: "#D6FF3D",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-sans)", "sans-serif"],
       },
       maxWidth: {
-        content: "1200px",
+        content: "1320px",
+      },
+      letterSpacing: {
+        tightest: "-0.04em",
       },
       keyframes: {
-        "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "200% 0" },
-          "100%": { backgroundPosition: "-200% 0" },
+        "marquee-rev": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
         },
-        "spin-slow": {
-          to: { transform: "rotate(360deg)" },
-        },
+        "spin-slow": { to: { transform: "rotate(360deg)" } },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.4" },
-          "50%": { opacity: "0.85" },
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.8" },
         },
-        equalize: {
-          "0%, 100%": { transform: "scaleY(0.35)" },
-          "50%": { transform: "scaleY(1)" },
+        beam: {
+          "0%, 100%": { opacity: "0.25", transform: "translateY(0) scaleY(1)" },
+          "50%": { opacity: "0.6", transform: "translateY(-2%) scaleY(1.06)" },
         },
       },
       animation: {
-        "fade-up": "fade-up 0.7s ease-out both",
-        shimmer: "shimmer 6s linear infinite",
-        "spin-slow": "spin-slow 24s linear infinite",
-        "pulse-glow": "pulse-glow 5s ease-in-out infinite",
+        marquee: "marquee var(--marquee-duration, 30s) linear infinite",
+        "marquee-rev": "marquee-rev var(--marquee-duration, 30s) linear infinite",
+        "spin-slow": "spin-slow 26s linear infinite",
+        "pulse-glow": "pulse-glow 6s ease-in-out infinite",
       },
     },
   },

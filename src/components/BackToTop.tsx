@@ -23,7 +23,7 @@ export function BackToTop() {
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 10 }}
-          className="fixed bottom-5 right-5 z-40 grid h-12 w-12 place-items-center rounded-full bg-ink text-cream shadow-lg shadow-ink/25 transition-colors hover:bg-ink-soft"
+          className="fixed bottom-5 right-5 z-40 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-volt to-flare text-white shadow-[0_10px_30px_-8px_rgba(255,45,120,0.6)] transition-transform hover:scale-110"
           aria-label="Retour en haut de la page"
         >
           <Icons.arrowUp className="h-5 w-5" />

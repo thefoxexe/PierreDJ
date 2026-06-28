@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { JsonLd } from "@/components/JsonLd";
@@ -10,10 +10,10 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const sora = Sora({
+const syne = Syne({
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["600", "700", "800"],
   variable: "--font-display",
 });
 
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B0B0F",
+  themeColor: "#0A0A0C",
   width: "device-width",
   initialScale: 1,
 };
@@ -82,12 +82,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${sora.variable}`}>
-      <body>
+    <html lang="fr" className={`${inter.variable} ${syne.variable}`}>
+      <body className="grain">
         <JsonLd />
         <a
           href="#contenu"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-cream"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-bone focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-night"
         >
           Aller au contenu principal
         </a>
