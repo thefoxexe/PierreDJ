@@ -29,18 +29,18 @@ export function Faq() {
                   <button
                     type="button"
                     onClick={() => setOpenIndex(open ? null : i)}
-                    className="flex w-full items-center gap-5 py-5 text-left"
+                    className="group flex w-full items-center gap-5 py-5 text-left"
                     aria-expanded={open}
                   >
                     <span className="font-display text-sm font-bold text-flare">0{i + 1}</span>
-                    <span className="flex-1 font-display text-lg font-bold uppercase tracking-tight sm:text-xl">
+                    <span className="flex-1 font-display text-lg font-bold uppercase tracking-tight transition-transform duration-300 group-hover:translate-x-1.5 sm:text-xl">
                       {item.question}
                     </span>
                     <span
                       className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
                         open
                           ? "rotate-45 border-transparent bg-gradient-to-br from-volt to-flare text-white"
-                          : "border-night/25 text-night"
+                          : "border-night/25 text-night group-hover:border-flare group-hover:text-flare"
                       }`}
                     >
                       <Icons.plus className="h-4 w-4" />

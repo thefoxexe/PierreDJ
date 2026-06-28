@@ -33,10 +33,10 @@ export function Services() {
             return (
               <RevealItem key={s.slug} className={span}>
                 <article
-                  className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-6 transition-all duration-300 ${
+                  className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 ${
                     s.featured
-                      ? "bg-gradient-to-br from-volt to-flare text-white"
-                      : "border border-bone/12 bg-night-800 hover:border-bone/30"
+                      ? "bg-gradient-to-br from-volt to-flare text-white hover:shadow-[0_24px_60px_-18px_rgba(255,45,120,0.65)]"
+                      : "border border-bone/12 bg-night-800 hover:border-bone/30 hover:shadow-[0_24px_60px_-22px_rgba(110,75,255,0.5)]"
                   }`}
                 >
                   {/* Image optionnelle */}
@@ -60,7 +60,9 @@ export function Services() {
                     </span>
                     <Icon
                       name={s.icon}
-                      className={`h-6 w-6 ${s.featured ? "text-white/80" : "text-bone/40"}`}
+                      className={`h-6 w-6 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125 ${
+                        s.featured ? "text-white/80" : "text-bone/40 group-hover:text-flare"
+                      }`}
                     />
                   </div>
 

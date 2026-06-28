@@ -17,12 +17,15 @@ export const about = {
     "Son approche : ecouter, comprendre vos envies, puis composer une soiree qui vous ressemble. Materiel professionnel, lecture de la piste de danse et sens du detail garantissent une experience fluide, elegante et memorable, du premier au dernier morceau.",
   ],
 
-  /** Chiffres cles [PLACEHOLDER] : adapter aux valeurs reelles */
+  /**
+   * Points cles du service (volontairement sans chiffres d'experience
+   * inventes). Adaptez librement quand de vraies donnees seront disponibles.
+   */
   stats: [
-    { value: "10+", label: "Annees d'experience" },
-    { value: "500+", label: "Evenements animes" },
     { value: "100%", label: "Sur mesure" },
-    { value: "5/5", label: "Satisfaction clients" },
+    { value: "Pro", label: "Son & lumiere" },
+    { value: "A → Z", label: "Ceremonie a l'after" },
+    { value: "Gratuit", label: "Devis sans engagement" },
   ],
 
   /** Valeurs / raisons de le choisir */

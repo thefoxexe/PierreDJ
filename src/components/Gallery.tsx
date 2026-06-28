@@ -49,10 +49,10 @@ export function Gallery() {
           >
             {placeholders.map((_, i) => (
               <RevealItem key={i} className={i === 0 ? "col-span-2 row-span-2" : ""}>
-                <div className="group relative flex h-full w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-night/15 bg-night-800 text-bone/40">
-                  <div className="absolute inset-0 bg-gradient-to-br from-volt/15 via-transparent to-flare/15 opacity-60" />
-                  <Icons.disc className="relative h-8 w-8 animate-spin-slow" />
-                  <span className="relative text-[11px] font-medium uppercase tracking-widest">
+                <div className="group relative flex h-full w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border border-night/15 bg-night-800 text-bone/40 transition-all duration-300 hover:border-transparent hover:shadow-[0_24px_60px_-24px_rgba(255,45,120,0.55)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-volt/15 via-transparent to-flare/15 opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
+                  <Icons.disc className="relative h-8 w-8 animate-spin-slow transition-transform duration-500 group-hover:scale-125" />
+                  <span className="relative text-[11px] font-medium uppercase tracking-widest transition-colors group-hover:text-bone/70">
                     Visuel a venir
                   </span>
                 </div>

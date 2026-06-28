@@ -45,19 +45,19 @@ export function About() {
           <div className="lg:col-span-5">
             <Reveal>
               {/* Placeholder portrait (a remplacer par une vraie photo) */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-night/15 bg-night-700">
-                <div className="absolute inset-0 bg-gradient-to-br from-volt/20 via-transparent to-flare/20" />
+              <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-night/15 bg-night-700">
+                <div className="absolute inset-0 bg-gradient-to-br from-volt/20 via-transparent to-flare/20 transition-opacity duration-500 group-hover:opacity-80" />
                 <div className="absolute inset-0 grid place-items-center">
-                  <div className="text-center text-bone/40">
+                  <div className="text-center text-bone/40 transition-transform duration-500 group-hover:scale-110">
                     <Icons.disc className="mx-auto h-10 w-10 animate-spin-slow" />
                     <p className="mt-3 text-xs font-medium uppercase tracking-widest">
                       Portrait a venir
                     </p>
                   </div>
                 </div>
-                {/* Sticker coin */}
+                {/* Sticker coin : disponibilite (verite, pas d'experience inventee) */}
                 <div className="absolute right-4 top-4 rounded-full bg-lime px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-night">
-                  Since {new Date().getFullYear() - 10}
+                  Dispo {new Date().getFullYear()}
                 </div>
               </div>
             </Reveal>
@@ -66,11 +66,11 @@ export function About() {
             <RevealGroup className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-night/15 bg-night/15">
               {about.stats.map((s) => (
                 <RevealItem key={s.label}>
-                  <div className="bg-bone p-5">
-                    <div className="font-display text-4xl font-extrabold tracking-tightest sm:text-5xl">
+                  <div className="group h-full bg-bone p-5 transition-colors duration-300 hover:bg-night">
+                    <div className="font-display text-4xl font-extrabold tracking-tightest transition-colors duration-300 group-hover:text-lime sm:text-5xl">
                       {s.value}
                     </div>
-                    <div className="mt-1 text-xs font-medium uppercase tracking-wide text-night/55">
+                    <div className="mt-1 text-xs font-medium uppercase tracking-wide text-night/55 transition-colors duration-300 group-hover:text-bone/70">
                       {s.label}
                     </div>
                   </div>

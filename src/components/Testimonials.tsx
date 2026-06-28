@@ -40,10 +40,10 @@ export function Testimonials() {
         <RevealGroup className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
           {testimonials.items.map((t, i) => (
             <RevealItem key={i}>
-              <figure className="flex h-full flex-col rounded-2xl border border-bone/12 bg-night-800 p-6 transition-colors duration-300 hover:border-bone/30">
+              <figure className="group flex h-full flex-col rounded-2xl border border-bone/12 bg-night-800 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-bone/30 hover:shadow-[0_24px_60px_-24px_rgba(110,75,255,0.5)]">
                 <div className="flex items-center justify-between">
                   <Stars rating={t.rating} />
-                  <Icons.disc className="h-5 w-5 text-bone/20" />
+                  <Icons.disc className="h-5 w-5 text-bone/20 transition-transform duration-700 group-hover:rotate-180" />
                 </div>
                 <blockquote className="mt-5 flex-1 text-lg leading-relaxed text-bone/85">
                   &ldquo;{t.quote}&rdquo;
