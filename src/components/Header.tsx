@@ -23,6 +23,25 @@ export function Header() {
     };
   }, [open]);
 
+  // Clic sur un lien du menu mobile : on ferme le menu et on debloque le
+  // defilement AVANT de naviguer vers l'ancre (sinon le scroll est bloque
+  // par overflow:hidden et le navigateur ne se rend pas a la bonne section).
+  function handleNavClick(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith("#")) return; // liens tel:/externes : comportement normal
+    e.preventDefault();
+    setOpen(false);
+    document.body.style.overflow = "";
+    const id = href.slice(1);
+    // Laisse le temps a l'animation de fermeture + au scroll de se debloquer.
+    window.setTimeout(() => {
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", href);
+      }
+    }, 320);
+  }
+
   // Transparente sur le hero sombre -> texte clair. Defilee/menu -> fond sombre.
   const solid = scrolled || open;
 
@@ -102,7 +121,7 @@ export function Header() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => handleNavClick(e, item.href)}
                     className="flex items-center gap-4 border-b border-bone/5 py-4 font-display text-xl font-bold uppercase text-bone/85 transition-colors hover:text-bone"
                   >
                     <span className="text-xs font-bold text-flare">
@@ -117,7 +136,7 @@ export function Header() {
                   <Icons.phone className="h-4 w-4" />
                   {site.contact.phone}
                 </a>
-                <a href="#contact" onClick={() => setOpen(false)} className="btn-fill w-full">
+                <a href="#contact" onClick={(e) => handleNavClick(e, "#contact")} className="btn-fill w-full">
                   Demander un devis
                 </a>
               </li>
